@@ -3,6 +3,7 @@
 auth tings bruhv
 """
 from flask import Flask, request
+from typing import List, TypeVar
 
 
 class Auth:
