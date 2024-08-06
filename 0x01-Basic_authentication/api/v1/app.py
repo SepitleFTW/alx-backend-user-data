@@ -16,6 +16,9 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 @app.before_request
 def filter_request():
+    """
+    fitler request before
+    """
     if auth is None:
         return
 
