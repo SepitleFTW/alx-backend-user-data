@@ -13,11 +13,21 @@ app = Flask(__name__)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
+auth = None
+
+if getenv('AUTH_TYPE') == "auth":
+    from api.v1.auth.auth import Auth
+    auth = Auth()
+
+elif getenv('AUTH_TYPE') == "basic_auth":
+    from api.v1.auth.basic_auth import BasicAuth
+    auth = BasicAuth()
+
 
 @app.before_request
 def filter_request():
     """
-    fitler request before
+    i am such a noob
     """
     if auth is None:
         return
@@ -46,22 +56,22 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauthorized_request(error) -> str:
-    """
-    unauthroized handling requests
-    returns error code 401
-    """
+    '''Unauthorized requests
+    '''
 
-    return jsonify({"error": "Unauthorized"}), 401
+    return jsonify({
+        "error": "Unauthorized"
+    }), 401
 
 
 @app.errorhandler(403)
 def forbidden_request(error) -> str:
-    """
-    fucntion for error because of forbidden request
-    returns error code 403
-    """
+    '''Forbidden request
+    '''
 
-    return jsonify({"error": "Forbidden"}), 403
+    return jsonify({
+        "error": "Forbidden"
+    }), 403
 
 
 if __name__ == "__main__":
