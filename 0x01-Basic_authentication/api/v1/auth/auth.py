@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+"""
+i am such a noob
+"""
 
 from typing import List, TypeVar
 from flask import Flask, request
