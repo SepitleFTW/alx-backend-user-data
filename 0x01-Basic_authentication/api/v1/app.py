@@ -30,7 +30,7 @@ def filter_request():
     i am such a noob
     """
     if auth is None:
-        return
+        return None
 
     excluded_paths = [
         '/api/v1/status/',
